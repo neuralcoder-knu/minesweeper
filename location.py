@@ -1,8 +1,12 @@
 import sys
+from datetime import datetime
+from random import randint
 
 import pygame
 from pygame import KEYDOWN, K_ESCAPE, QUIT, MOUSEBUTTONUP
 
+from config import width_x, height_y, length_bomb
+from point import Point
 from textsprite import TextSprite
 
 
@@ -19,7 +23,8 @@ class Location(object):
 
     def draw(self):
         pass
-    
+
+
 class StartLocation(Location):
 
     def __init__(self, parent):
@@ -63,21 +68,58 @@ class StartLocation(Location):
                             point.p_test()
             x, y = pygame.mouse.get_pos()
             print('x=%d,y=%d' % (x, y))
-            self.test_finish()
+            self.check_finish()
             if y < 40:
                 self.restart()
 
     def bombing(self, points):
-        #Todo:
-
+        for x in range(length_bomb):
+            while True:
+                x_p = randint(0, width_x - 1)
+                y_p = randint(0, height_y - 1)
+                if not points[x_p][y_p].bomb:
+                    points[x_p][y_p].bomb = True
+                    break
+        return points
 
     def restart(self):
-        #Todo:
+        self.controls = pygame.sprite.Group()
+        self.messages = pygame.sprite.Group()
+        self.controls_captions = pygame.sprite.Group()
+        self.points = []
+        for x in range(width_x):
+            self.points.append([])
+            for y in range(height_y):
+                self.points[x].append(Point(x, y, self.points, self))
 
+        for x in range(width_x):
+            for y in range(height_y):
+                self.points[x][y].paint()
+                self.controls.add(self.points[x][y])
+                self.controls_captions.add(self.points[x][y].textSprite)
+        self.bombing(self.points)
+        self.in_game = True
+        self.st_time = datetime.datetime.now()
 
     def end_game(self, reason):
-        #Todo:
+        self.in_game = False
+        if reason == 1:
+            for x in range(width_x):
+                for y in range(height_y):
+                    pass
+        if reason == 0:
+            message = TextSprite(width_x * 20 / 2, height_y * 20 / 2, 'Winner!', 50, (255, 0, 255))
 
+        else:
+            message = TextSprite(width_x * 20 / 2, height_y * 20 / 2, 'Fail!', 50, (255, 0, 0))
+        message.generateImage()
+        self.messages.add(message)
 
     def check_finish(self):
-        #Todo:
+        finish = True
+        for x in range(width_x):
+            for y in range(height_y):
+                if (self.points[x][y].bomb == False) and (self.points[x][y].open == False):
+                    finish = False
+        if finish:
+            self.end_game(0)
