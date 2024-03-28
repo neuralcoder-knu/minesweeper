@@ -3,6 +3,8 @@ import os
 import pygame
 from pygame import RLEACCEL
 
+from textsprite import TextSprite
+
 
 class Point(pygame.sprite.Sprite):
     def __init__(self, x, y, area, parent, bomb=False):
@@ -19,6 +21,7 @@ class Point(pygame.sprite.Sprite):
         self.bomb = bomb
         self.open = False
         self.flag = False
+        self.textSprite = TextSprite(self.x + 10, self.y + 10)
         self.paint()
         self.generateImage()
 
@@ -37,8 +40,22 @@ class Point(pygame.sprite.Sprite):
         return pygame.Rect(left, top, width, height)
 
     def paint(self):
-        #TODO: sprite print
-        print("TODO")
+        if self.open:
+            if self.have_bomb():
+                self.textSprite.setText('b')
+                #TODO: end_game
+            else:
+                number = self.near_bombs()
+                self.textSprite.setText('%d' % (number,))
+                if number == 0:
+                    self.textSprite.setText('-')
+                    for p in self.get_around():
+                        if not p.open:
+                            p.push()
+        elif self.flag:
+            self.textSprite.setText('f')
+        else:
+            self.textSprite.setText(' ')
 
     def _test_p(self, x, y):
         if x in range(len(self.area_p[0])):
