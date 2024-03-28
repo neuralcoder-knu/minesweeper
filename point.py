@@ -43,7 +43,7 @@ class Point(pygame.sprite.Sprite):
         if self.open:
             if self.have_bomb():
                 self.textSprite.setText('b')
-                #TODO: end_game
+                self.parent.end_game(1)
             else:
                 number = self.near_bombs()
                 self.textSprite.setText('%d' % (number,))
@@ -56,6 +56,7 @@ class Point(pygame.sprite.Sprite):
             self.textSprite.setText('f')
         else:
             self.textSprite.setText(' ')
+        self.textSprite.generateImage()
 
     def _test_p(self, x, y):
         if x in range(len(self.area_p[0])):
