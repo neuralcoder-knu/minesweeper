@@ -1,4 +1,5 @@
 import pygame
+from pygame import RLEACCEL
 
 
 class Sprite(pygame.sprite.Sprite):
@@ -8,6 +9,12 @@ class Sprite(pygame.sprite.Sprite):
         self.rect = None
         self.x = x
         self.y = y
+
+    def init_image(self, imgPath):
+        self.image = pygame.image.load(imgPath).convert()
+        self.image.set_colorkey(self.image.get_at((0, 0)), RLEACCEL)
+        self.rect = self.image.get_rect()
+        self.rect.center = (self.x, self.y)
 
     def move_x(self, x):
         self.x = self.x + x
