@@ -1,5 +1,5 @@
+import datetime
 import sys
-from datetime import datetime
 from random import randint
 
 import pygame
@@ -29,6 +29,7 @@ class StartLocation(Location):
 
     def __init__(self, parent):
         Location.__init__(self, parent)
+        self.st_time = None
         pygame.mouse.set_visible(1)
         pygame.key.set_repeat(0)
         self.messages = pygame.sprite.Group()
