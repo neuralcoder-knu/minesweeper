@@ -12,6 +12,11 @@ class TextSprite(Sprite):
         self.color = color
         self.text = text
 
+    def generateImage(self):
+        self.image = self.font.render(self.text, True, self.color)
+        self.rect = self.image.get_rect()
+        self.rect.center = (self.x, self.y)
+
     def setText(self, text):
         self.text = text
         if text == 'b':
