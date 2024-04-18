@@ -14,21 +14,26 @@ pygame.display.set_mode((640, 480))
 
 startLocation = StartLocation(None)
 
+
 @pytest.fixture
 def sample_point():
     return Point(0, 0, [], startLocation, True)
+
 
 def test_point_creation(sample_point):
     assert sample_point.x == 0
     assert sample_point.y == 40
 
+
 def test_push_method(sample_point):
     sample_point.push()
     assert startLocation.in_game == False
 
+
 def test_flag_method(sample_point):
     sample_point.p_flag()
     assert sample_point.flag == True
+
 
 def test_get_surface_rect_method(sample_point):
     surface_rect = sample_point.get_surface_rect()
