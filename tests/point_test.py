@@ -1,9 +1,12 @@
 import pytest
+
+from location import StartLocation
 from point import Point
 
 @pytest.fixture
 def sample_point():
-    return Point(0, 0, [], None)
+    startLocation = StartLocation(None)
+    return Point(0, 0, [], startLocation)
 
 def test_point_creation(sample_point):
     assert sample_point.x == 0
