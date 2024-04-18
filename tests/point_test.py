@@ -1,7 +1,15 @@
 import pytest
+import pygame
+import os
+import sys
 
 from location import StartLocation
 from point import Point
+
+sys.path.insert(0,
+                os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+image = pygame.Surface((50, 50))
+pygame.init()
 
 @pytest.fixture
 def sample_point():
