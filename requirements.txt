@@ -1,2 +1,4 @@
 pygame
 pytest
+pytest-html
+flake8-html
