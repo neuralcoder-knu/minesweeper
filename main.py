@@ -21,5 +21,6 @@ def main():
             game.location.event(event)
             game.event(event)
 
+
 if __name__ == "__main__":
     main()
