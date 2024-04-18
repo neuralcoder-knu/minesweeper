@@ -27,12 +27,12 @@ def test_point_creation(sample_point):
 
 def test_push_method(sample_point):
     sample_point.push()
-    assert startLocation.in_game == False
+    assert not startLocation.in_game
 
 
 def test_flag_method(sample_point):
     sample_point.p_flag()
-    assert sample_point.flag == True
+    assert sample_point.flag
 
 
 def test_get_surface_rect_method(sample_point):
