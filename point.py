@@ -26,7 +26,8 @@ class Point(pygame.sprite.Sprite):
         self.generateImage()
 
     def generateImage(self):
-        self.image = pygame.image.load(os.path.join('data', 'point.png')).convert()
+        self.image = pygame.image\
+            .load(os.path.join('data', 'point.png')).convert()
         self.image.set_colorkey(self.image.get_at((0, 0)), RLEACCEL)
         self.rect = self.image.get_rect()
 
