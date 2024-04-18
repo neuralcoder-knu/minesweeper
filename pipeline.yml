@@ -1,0 +1,13 @@
+stages:
+  - test
+  - lint
+
+pytest:
+  stage: test
+  script:
+    - pytest
+
+flake8:
+  stage: lint
+  script:
+    - flake8
