@@ -12,10 +12,11 @@ image = pygame.Surface((50, 50))
 pygame.init()
 pygame.display.set_mode((640, 480))
 
+startLocation = StartLocation(None)
+
 @pytest.fixture
 def sample_point():
-    startLocation = StartLocation(None)
-    return Point(0, 0, [], startLocation)
+    return Point(0, 0, [], startLocation, True)
 
 def test_point_creation(sample_point):
     assert sample_point.x == 0
@@ -23,7 +24,7 @@ def test_point_creation(sample_point):
 
 def test_push_method(sample_point):
     sample_point.push()
-    assert sample_point.open == True
+    assert startLocation.in_game == False
 
 def test_flag_method(sample_point):
     sample_point.p_flag()
