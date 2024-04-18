@@ -52,7 +52,7 @@ class StartLocation(Location):
 
     def event(self, event):
         if (event.type == QUIT) \
-                or (event.type == KEYDOWN 
+                or (event.type == KEYDOWN
                     and event.key == K_ESCAPE):
             sys.exit(0)
         else:
@@ -112,14 +112,18 @@ class StartLocation(Location):
                 for y in range(height_y):
                     pass
         if reason == 0:
-            message = TextSprite(width_x * 20 / 2,
-                                 height_y * 20 / 2, 'Winner!', 50, (255, 0, 255))
+            message = self.generate_text('Winner!', (255, 0, 255))
 
         else:
-            message = TextSprite(width_x * 20 / 2,
-                                 height_y * 20 / 2, 'Fail!', 50, (255, 0, 0))
+            message = self.generate_text('Fail!', (255, 0, 0))
+
         message.generateImage()
         self.messages.add(message)
+
+    @staticmethod
+    def generate_text(result, color):
+        return TextSprite(width_x * 20 / 2,
+                          height_y * 20 / 2, result, 50, color)
 
     def check_finish(self):
         finish = True
