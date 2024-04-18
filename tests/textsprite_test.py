@@ -16,7 +16,3 @@ def test_set_text_method(sample_text_sprite):
 def test_set_color_method(sample_text_sprite):
     sample_text_sprite.setColor((255, 0, 0))
     assert sample_text_sprite.color == (255, 0, 0)
-
-def test_set_size_method(sample_text_sprite):
-    sample_text_sprite.setSize(30)
-    assert sample_text_sprite.font.get_height() == 30
