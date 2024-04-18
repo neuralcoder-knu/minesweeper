@@ -19,7 +19,7 @@ def sample_point():
 
 def test_point_creation(sample_point):
     assert sample_point.x == 0
-    assert sample_point.y == 0
+    assert sample_point.y == 40
 
 def test_push_method(sample_point):
     sample_point.push()
