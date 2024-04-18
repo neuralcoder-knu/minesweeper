@@ -51,14 +51,17 @@ class StartLocation(Location):
         self.messages.draw(self.window)
 
     def event(self, event):
-        if (event.type == QUIT) or (event.type == KEYDOWN and event.key == K_ESCAPE):
+        if (event.type == QUIT) \
+                or (event.type == KEYDOWN 
+                    and event.key == K_ESCAPE):
             sys.exit(0)
         else:
             pass
         if event.type == MOUSEBUTTONUP:
             for p in self.points:
                 for point in p:
-                    if (point.rect.collidepoint(pygame.mouse.get_pos())) and (self.in_game):
+                    if (point.rect.collidepoint(pygame.mouse.get_pos())) \
+                            and (self.in_game):
                         # pass
                         print(event)
                         if event.button == 1:
@@ -109,10 +112,12 @@ class StartLocation(Location):
                 for y in range(height_y):
                     pass
         if reason == 0:
-            message = TextSprite(width_x * 20 / 2, height_y * 20 / 2, 'Winner!', 50, (255, 0, 255))
+            message = TextSprite(width_x * 20 / 2,
+                                 height_y * 20 / 2, 'Winner!', 50, (255, 0, 255))
 
         else:
-            message = TextSprite(width_x * 20 / 2, height_y * 20 / 2, 'Fail!', 50, (255, 0, 0))
+            message = TextSprite(width_x * 20 / 2,
+                                 height_y * 20 / 2, 'Fail!', 50, (255, 0, 0))
         message.generateImage()
         self.messages.add(message)
 
@@ -120,7 +125,8 @@ class StartLocation(Location):
         finish = True
         for x in range(width_x):
             for y in range(height_y):
-                if (self.points[x][y].bomb == False) and (self.points[x][y].open == False):
+                if (not self.points[x][y].bomb) \
+                        and (not self.points[x][y].open):
                     finish = False
         if finish:
             self.end_game(0)
