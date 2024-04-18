@@ -10,6 +10,7 @@ sys.path.insert(0,
                 os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 image = pygame.Surface((50, 50))
 pygame.init()
+pygame.display.set_mode((640, 480))
 
 @pytest.fixture
 def sample_point():
